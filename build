@@ -13,7 +13,7 @@ docker build \
 # Run container in detached state
 docker run \
   --detach \
-  --publish 127.0.0.1:9980:8000 \
+  --publish 127.0.0.1:9980:9980 \
   --name sia-container \
   sia-image \
   /sbin/init
