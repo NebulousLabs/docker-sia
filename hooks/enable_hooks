@@ -1,0 +1,2 @@
+#!/bin/bash
+rm -rf .git/hooks && ln -s -f ../hooks .git/

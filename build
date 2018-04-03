@@ -1,0 +1,21 @@
+#!/bin/bash
+
+## Exit immediately on error.
+set -e
+
+# Echo to console.
+set -x
+
+docker build \
+  --tag sia-image \
+  .
+
+# Run container in detached state
+docker run \
+  --detach \
+  --publish 127.0.0.1:9980:8000 \
+  --name sia-container \
+  sia-image \
+  /sbin/init
+
+curl -A "Sia-Agent" "http://localhost:9980/consensus"
