@@ -19,6 +19,14 @@ RUN wget "$SIA_RELEASE" && \
       unzip -j "$SIA_ZIP" "${SIA_PACKAGE}/siac" -d "$SIA_DIR" && \
       unzip -j "$SIA_ZIP" "${SIA_PACKAGE}/siad" -d "$SIA_DIR"
 
+# Clean up packages that were only needed during install.
+RUN apt-get remove -y wget unzip &&\
+    rm -rf /var/lib/apt/lists/* && \
+    rm -Rf /usr/share/doc && \
+    rm -Rf /usr/share/man && \
+    apt-get autoremove -y && \
+    apt-get clean
+
 EXPOSE 9980 9981 9982
 
 WORKDIR "$SIA_DIR"
