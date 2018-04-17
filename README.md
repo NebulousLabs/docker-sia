@@ -2,6 +2,20 @@
 
 [![Build Status](https://travis-ci.org/mtlynch/docker-sia.svg?branch=master)](https://travis-ci.org/mtlynch/docker-sia) [![Docker Pulls](https://img.shields.io/docker/pulls/mtlynch/sia.svg?maxAge=604800)](https://hub.docker.com/r/mtlynch/sia/) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](LICENSE)
 
+## Supported Tags
+
+* latest
+* 1.3.2
+* 1.3.1
+* 1.3.0
+* 1.2.0
+* 1.1.2
+* 1.1.1
+* 1.1.0
+* 1.0.4
+* 1.0.3
+* 1.0.1
+
 ## Usage
 
 ```bash
