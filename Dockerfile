@@ -3,12 +3,10 @@ LABEL maintainer="Michael Lynch <michael@mtlynch.io>"
 
 ARG SIA_VERSION="1.3.2"
 ENV SIA_VERSION $SIA_VERSION
-ARG SIA_PACKAGE="Sia-v${SIA_VERSION}-linux-amd64"
-ENV SIA_PACKAGE $SIA_PACKAGE
+ENV SIA_PACKAGE="Sia-v${SIA_VERSION}-linux-amd64"
 ARG SIA_ZIP="${SIA_PACKAGE}.zip"
 ENV SIA_ZIP $SIA_ZIP
 ARG SIA_RELEASE="https://github.com/NebulousLabs/Sia/releases/download/v${SIA_VERSION}/${SIA_ZIP}"
-ENV SIA_RELEASE $SIA_RELEASE
 ARG SIA_DIR="/sia"
 ENV SIA_DIR $SIA_DIR
 ENV SIA_DATA_DIR="/sia-data"
