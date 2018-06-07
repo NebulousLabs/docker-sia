@@ -6,6 +6,7 @@
 
 * latest: The latest official binary release.
 * dev: The latest dev build from the Sia Github source.
+* 1.3.3
 * 1.3.2
 * 1.3.1
 * 1.3.0
