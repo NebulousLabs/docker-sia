@@ -6,6 +6,7 @@
 
 * latest: The latest official binary release.
 * dev: The latest dev build from the Sia Github source.
+* 1.3.3b - Sia released two separate binaries, [both versioned 1.3.3](https://www.reddit.com/r/siacoin/comments/8rdred/video_sia_weekly_update_week_of_june_11_2018/e0qm1qs/?st=jigmt8rp&sh=384b3060).
 * 1.3.3
 * 1.3.2
 * 1.3.1
