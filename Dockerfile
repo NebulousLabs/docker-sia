@@ -22,6 +22,11 @@ RUN wget "$SIA_RELEASE" && \
       unzip -j "$SIA_ZIP" "${SIA_PACKAGE}/siac" -d "$SIA_DIR" && \
       unzip -j "$SIA_ZIP" "${SIA_PACKAGE}/siad" -d "$SIA_DIR"
 
+# Workaround for backwards compatibility with old images, which hardcoded the
+# Sia data directory as /mnt/sia. Creates a symbolic link so that any previous
+# path references stored in the Sia host config still work.
+RUN ln --symbolic "$SIA_DATA_DIR" /mnt/sia
+
 # Clean up.
 RUN apt-get remove -y wget unzip && \
     rm "$SIA_ZIP" && \
