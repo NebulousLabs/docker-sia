@@ -5,8 +5,8 @@ ENV GOOS linux
 ENV GOARCH amd64
 ENV CGO_ENABLED 0
 
-RUN go get -d -u github.com/NebulousLabs/Sia/... && \
-    cd $GOPATH/src/github.com/NebulousLabs/Sia && \
+RUN go get -d -u gitlab.com/NebulousLabs/Sia/... && \
+    cd $GOPATH/src/gitlab.com/NebulousLabs/Sia && \
     make release
 
 FROM alpine
