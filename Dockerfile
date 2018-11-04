@@ -2,15 +2,11 @@ FROM debian:jessie-slim
 LABEL maintainer="Michael Lynch <michael@mtlynch.io>"
 
 ARG SIA_VERSION="1.3.7"
-ENV SIA_VERSION $SIA_VERSION
-ENV SIA_PACKAGE="Sia-v${SIA_VERSION}-linux-amd64"
+ARG SIA_PACKAGE="Sia-v${SIA_VERSION}-linux-amd64"
 ARG SIA_ZIP="${SIA_PACKAGE}.zip"
-ENV SIA_ZIP $SIA_ZIP
 ARG SIA_RELEASE="https://sia.tech/static/releases/${SIA_ZIP}"
 ARG SIA_DIR="/sia"
-ENV SIA_DIR $SIA_DIR
-ENV SIA_DATA_DIR="/sia-data"
-ENV SIA_MODULES gctwhr
+ARG SIA_DATA_DIR="/sia-data"
 
 RUN apt-get update && apt-get install -y \
   socat \
@@ -39,6 +35,10 @@ RUN apt-get remove -y wget unzip && \
 EXPOSE 9980 9981 9982
 
 WORKDIR "$SIA_DIR"
+
+ENV SIA_DATA_DIR "$SIA_DATA_DIR"
+ENV SIA_MODULES gctwhr
+
 ENTRYPOINT socat tcp-listen:9980,reuseaddr,fork tcp:localhost:8000 & \
   ./siad \
     --modules "$SIA_MODULES" \
