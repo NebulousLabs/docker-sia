@@ -1,4 +1,4 @@
-FROM debian:jessie-slim AS zip_downloader
+FROM debian:stretch-slim AS zip_downloader
 LABEL maintainer="Michael Lynch <michael@mtlynch.io>"
 
 ARG SIA_VERSION="1.4.0"
@@ -16,7 +16,7 @@ RUN wget "$SIA_RELEASE" && \
       unzip -j "$SIA_ZIP" "${SIA_PACKAGE}/siac" -d /sia && \
       unzip -j "$SIA_ZIP" "${SIA_PACKAGE}/siad" -d /sia
 
-FROM debian:jessie-slim
+FROM debian:stretch-slim
 ARG SIA_DIR="/sia"
 ARG SIA_DATA_DIR="/sia-data"
 
