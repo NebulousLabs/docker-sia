@@ -6,6 +6,7 @@
 
 * latest: The latest official binary release.
 * dev: The latest dev build from the Sia Gitlab source.
+* 1.4.1.1
 * 1.4.1
 * 1.4.0
 * 1.3.7

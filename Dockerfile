@@ -1,7 +1,7 @@
 FROM debian:stretch-slim AS zip_downloader
 LABEL maintainer="Michael Lynch <michael@mtlynch.io>"
 
-ARG SIA_VERSION="1.4.1"
+ARG SIA_VERSION="1.4.1.1"
 ARG SIA_PACKAGE="Sia-v${SIA_VERSION}-linux-amd64"
 ARG SIA_ZIP="${SIA_PACKAGE}.zip"
 ARG SIA_RELEASE="https://sia.tech/static/releases/${SIA_ZIP}"
