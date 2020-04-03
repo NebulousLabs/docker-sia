@@ -1,15 +1,13 @@
 FROM debian:stretch-slim AS zip_downloader
-LABEL maintainer="Michael Lynch <michael@mtlynch.io>"
+LABEL maintainer="NebulousLabs <developers@nebulous.tech>"
 
-ARG SIA_VERSION="1.4.4"
+ARG SIA_VERSION="1.4.7"
 ARG SIA_PACKAGE="Sia-v${SIA_VERSION}-linux-amd64"
 ARG SIA_ZIP="${SIA_PACKAGE}.zip"
 ARG SIA_RELEASE="https://sia.tech/releases/${SIA_ZIP}"
 
 RUN apt-get update
-RUN apt-get install -y \
-      wget \
-      unzip
+RUN apt-get install -y wget unzip
 
 RUN wget "$SIA_RELEASE" && \
       mkdir /sia && \
