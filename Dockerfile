@@ -17,7 +17,6 @@ RUN wget "$SIA_RELEASE" && \
 FROM debian:stretch-slim
 ARG SIA_DIR="/sia"
 ARG SIA_DATA_DIR="/sia-data"
-ARG SIA_API_PASSWORD="/root/.sia"
 
 COPY --from=zip_downloader /sia/siac "${SIA_DIR}/siac"
 COPY --from=zip_downloader /sia/siad "${SIA_DIR}/siad"
@@ -36,7 +35,6 @@ WORKDIR "$SIA_DIR"
 
 ENV SIA_DATA_DIR "$SIA_DATA_DIR"
 ENV SIA_MODULES gctwhr
-ENV SIA_API_PASSWORD "$SIA_API_PASSWORD"
 
 ENTRYPOINT socat tcp-listen:9980,reuseaddr,fork tcp:localhost:8000 & \
   ./siad \
