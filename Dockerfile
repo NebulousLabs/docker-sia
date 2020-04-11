@@ -15,6 +15,7 @@ RUN wget "$SIA_RELEASE" && \
       unzip -j "$SIA_ZIP" "${SIA_PACKAGE}/siad" -d /sia
 
 FROM debian:stretch-slim
+LABEL maintainer="NebulousLabs <developers@nebulous.tech>"
 ARG SIA_DIR="/sia"
 ARG SIA_DATA_DIR="/sia-data"
 
