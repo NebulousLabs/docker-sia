@@ -6,8 +6,7 @@ ARG SIA_PACKAGE="Sia-v${SIA_VERSION}-linux-amd64"
 ARG SIA_ZIP="${SIA_PACKAGE}.zip"
 ARG SIA_RELEASE="https://sia.tech/releases/${SIA_ZIP}"
 
-RUN apt-get update
-RUN apt-get install -y wget unzip
+RUN apt-get update && apt-get install -y wget unzip
 
 RUN wget "$SIA_RELEASE" && \
       mkdir /sia && \
@@ -15,14 +14,14 @@ RUN wget "$SIA_RELEASE" && \
       unzip -j "$SIA_ZIP" "${SIA_PACKAGE}/siad" -d /sia
 
 FROM debian:stretch-slim
+LABEL maintainer="NebulousLabs <developers@nebulous.tech>"
 ARG SIA_DIR="/sia"
 ARG SIA_DATA_DIR="/sia-data"
 
 COPY --from=zip_downloader /sia/siac "${SIA_DIR}/siac"
 COPY --from=zip_downloader /sia/siad "${SIA_DIR}/siad"
 
-RUN apt-get update
-RUN apt-get install -y socat
+RUN apt-get update && apt-get install -y socat
 
 # Workaround for backwards compatibility with old images, which hardcoded the
 # Sia data directory as /mnt/sia. Creates a symbolic link so that any previous
