@@ -11,7 +11,6 @@ RUN go get -d -u gitlab.com/NebulousLabs/Sia/... && \
 
 FROM alpine
 LABEL maintainer="NebulousLabs <developers@nebulous.tech>"
-LABEL autoheal=true
 
 ENV SIA_DIR /sia
 ENV SIA_DATA_DIR="/sia-data"
@@ -22,11 +21,6 @@ RUN apk --no-cache add socat
 WORKDIR "$SIA_DIR"
 COPY --from=builder /go/bin/siad ./
 COPY --from=builder go/bin/siac ./
-
-COPY ../healthcheck.sh .
-
-HEALTHCHECK --interval=10s CMD ["./healthcheck.sh"]
-
 ENTRYPOINT socat tcp-listen:9980,reuseaddr,fork tcp:localhost:8000 & \
   ./siad \
     --modules "$SIA_MODULES" \
