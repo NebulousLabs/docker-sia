@@ -15,13 +15,15 @@ RUN wget "$SIA_RELEASE" && \
 
 FROM debian:stretch-slim
 LABEL maintainer="NebulousLabs <developers@nebulous.tech>"
+LABEL autoheal=true
+
 ARG SIA_DIR="/sia"
 ARG SIA_DATA_DIR="/sia-data"
 
 COPY --from=zip_downloader /sia/siac "${SIA_DIR}/siac"
 COPY --from=zip_downloader /sia/siad "${SIA_DIR}/siad"
 
-RUN apt-get update && apt-get install -y socat
+RUN apt-get update && apt-get install -y --no-install-recommends socat
 
 # Workaround for backwards compatibility with old images, which hardcoded the
 # Sia data directory as /mnt/sia. Creates a symbolic link so that any previous
@@ -34,6 +36,10 @@ WORKDIR "$SIA_DIR"
 
 ENV SIA_DATA_DIR "$SIA_DATA_DIR"
 ENV SIA_MODULES gctwhr
+
+COPY healthcheck.sh .
+
+HEALTHCHECK --interval=10s CMD ["./healthcheck.sh"]
 
 ENTRYPOINT socat tcp-listen:9980,reuseaddr,fork tcp:localhost:8000 & \
   ./siad \
