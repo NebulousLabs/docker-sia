@@ -15,6 +15,8 @@ RUN wget "$SIA_RELEASE" && \
 
 FROM debian:stretch-slim
 LABEL maintainer="NebulousLabs <developers@nebulous.tech>"
+LABEL autoheal=true
+
 ARG SIA_DIR="/sia"
 ARG SIA_DATA_DIR="/sia-data"
 
@@ -35,6 +37,9 @@ WORKDIR "$SIA_DIR"
 ENV SIA_DATA_DIR "$SIA_DATA_DIR"
 ENV SIA_MODULES gctwhr
 
-COPY run.sh ./
+COPY healthcheck.sh .
+COPY run.sh .
+
+HEALTHCHECK --interval=10s CMD ["./healthcheck.sh"]
 
 ENTRYPOINT ["./run.sh"]
