@@ -21,6 +21,6 @@ RUN apk --no-cache add socat
 WORKDIR "$SIA_DIR"
 COPY --from=builder /go/bin/siad ./
 COPY --from=builder go/bin/siac ./
-COPY ../run.sh ./
+COPY run.sh ./
 
 ENTRYPOINT ["./run.sh"]
