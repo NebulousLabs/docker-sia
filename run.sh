@@ -1,7 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 socat tcp-listen:9980,reuseaddr,fork tcp:localhost:8000 &
 
+# Use the `cat` utility in order assign a multi-line string to a variable.
 SIAD_CMD=$(cat <<-END
 ./siad \
   --modules $SIA_MODULES \
