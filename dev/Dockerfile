@@ -21,8 +21,6 @@ RUN apk --no-cache add socat
 WORKDIR "$SIA_DIR"
 COPY --from=builder /go/bin/siad ./
 COPY --from=builder go/bin/siac ./
-ENTRYPOINT socat tcp-listen:9980,reuseaddr,fork tcp:localhost:8000 & \
-  ./siad \
-    --modules "$SIA_MODULES" \
-    --sia-directory "$SIA_DATA_DIR" \
-    --api-addr "localhost:8000"
+COPY run.sh ./
+
+ENTRYPOINT ["./run.sh"]

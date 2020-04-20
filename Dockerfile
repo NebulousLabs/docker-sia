@@ -38,11 +38,8 @@ ENV SIA_DATA_DIR "$SIA_DATA_DIR"
 ENV SIA_MODULES gctwhr
 
 COPY healthcheck.sh .
+COPY run.sh .
 
 HEALTHCHECK --interval=10s CMD ["./healthcheck.sh"]
 
-ENTRYPOINT socat tcp-listen:9980,reuseaddr,fork tcp:localhost:8000 & \
-  ./siad \
-    --modules "$SIA_MODULES" \
-    --sia-directory "$SIA_DATA_DIR" \
-    --api-addr "localhost:8000"
+ENTRYPOINT ["./run.sh"]
