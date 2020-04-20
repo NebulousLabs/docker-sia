@@ -36,5 +36,9 @@ WORKDIR "$SIA_DIR"
 ENV SIA_DATA_DIR "$SIA_DATA_DIR"
 ENV SIA_MODULES gctwhr
 
+COPY healthcheck.sh .
 COPY run.sh ./
+
+HEALTHCHECK --interval=10s CMD ["./healthcheck.sh"]
+
 ENTRYPOINT ["./run.sh"]
