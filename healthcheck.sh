@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # Check if `socat` is running
 if [ -z "$(pidof socat)" ]; then

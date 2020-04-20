@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 socat tcp-listen:9980,reuseaddr,fork tcp:localhost:8000 &
 
