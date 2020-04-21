@@ -1,5 +1,5 @@
 FROM debian:stretch-slim AS zip_downloader
-LABEL maintainer="NebulousLabs <developers@nebulous.tech>"
+LABEL maintainer="NebulousLabs <devs@nebulous.tech>"
 
 ARG SIA_VERSION="1.4.7"
 ARG SIA_PACKAGE="Sia-v${SIA_VERSION}-linux-amd64"
@@ -14,7 +14,7 @@ RUN wget "$SIA_RELEASE" && \
       unzip -j "$SIA_ZIP" "${SIA_PACKAGE}/siad" -d /sia
 
 FROM alpine:3
-LABEL maintainer="NebulousLabs <developers@nebulous.tech>"
+LABEL maintainer="NebulousLabs <devs@nebulous.tech>"
 ARG SIA_DIR="/sia"
 ARG SIA_DATA_DIR="/sia-data"
 
@@ -37,7 +37,7 @@ ENV SIA_DATA_DIR "$SIA_DATA_DIR"
 ENV SIA_MODULES gctwhr
 
 COPY healthcheck.sh .
-COPY run.sh ./
+COPY run.sh .
 
 HEALTHCHECK --interval=10s CMD ["./healthcheck.sh"]
 
