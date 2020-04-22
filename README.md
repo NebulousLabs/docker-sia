@@ -55,6 +55,24 @@ docker run -d \
     willfarrell/autoheal
 ```
 
+## Which image to use?
+
+If you are unsure which image to use, use the default `latest` image.  
+If using an Alpine-based image makes more sense in your environment - use the 
+`alpine` image.  
+If you want to play around with the latest development build and see what we are 
+working on, use the `dev` image. Keep in mind that the `dev` image might not be 
+suitable for regular production use! 
+
+## Build it yourself
+
+Building the container is very simple, the only thing you need to keep in mind 
+is to run the build from the project's root folder, so your build context will 
+have access to the various scripts we're using:
+```
+docker build -t sia:1.4.7-dev-custom -f dev/Dockerfile
+```
+
 ## More examples
 
 For more usage examples, see the blog post, ["Fun with Sia and Docker."](https://blog.spaceduck.io/sia-docker/)
