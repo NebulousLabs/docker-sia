@@ -66,7 +66,7 @@ suitable for regular production use!
 
 ## Build it yourself
 
-Building the container is very simple, the only thing you need to keep in mind 
+Building the container is very simple. The only thing you need to keep in mind 
 is to run the build from the project's root folder, so your build context will 
 have access to the various scripts we're using:
 ```
