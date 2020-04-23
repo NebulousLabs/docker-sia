@@ -6,12 +6,15 @@ set -e
 # Echo to console.
 set -x
 
-## Cleanup any potential leftover test containers
-CONTAINERS=$(docker ps -a -q --filter "name=sia-test-container")
-if [ ! -z $CONTAINERS ]; then
-  docker stop $CONTAINERS
-  docker rm   $CONTAINERS
-fi
+cleanup_test_containers() {
+  CONTAINERS=$(docker ps -a -q --filter "name=sia-test-container")
+  if [ ! -z $CONTAINERS ]; then
+    docker stop $CONTAINERS
+    docker rm   $CONTAINERS
+  fi
+}
+
+cleanup_test_containers
 
 for DIR in ./ ./alpine ./dev
 do
@@ -47,9 +50,4 @@ do
   rm -rf $DUMMY_DATA_DIR
 done
 
-## Cleanup
-CONTAINERS=$(docker ps -a -q --filter "name=sia-test-container")
-if [ ! -z $CONTAINERS ]; then
-  docker stop $CONTAINERS
-  docker rm   $CONTAINERS
-fi
+cleanup_test_containers
