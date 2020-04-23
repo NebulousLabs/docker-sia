@@ -6,11 +6,21 @@ set -e
 # Echo to console.
 set -x
 
-for DIR in ./ ./dev
+cleanup_test_containers() {
+  CONTAINERS=$(docker ps -a -q --filter "name=sia-test-container")
+  if [ ! -z $CONTAINERS ]; then
+    docker stop $CONTAINERS
+    docker rm   $CONTAINERS
+  fi
+}
+
+cleanup_test_containers
+
+for DIR in ./ ./alpine ./dev
 do
-  pushd $DIR
   docker build \
     --tag sia-image \
+    -f $DIR/Dockerfile \
     .
 
   export DUMMY_DATA_DIR=$(mktemp -d)
@@ -18,10 +28,10 @@ do
   # Run container in detached state
   docker run \
     --detach \
-    --publish 127.0.0.1:9980:9980 \
+    --publish 127.0.0.1:9988:9980 \
     --volume "${DUMMY_DATA_DIR}:/sia-data" \
     --env SIA_MODULES=cg \
-    --name sia-container \
+    --name sia-test-container \
     sia-image
 
   sleep 5s
@@ -30,12 +40,14 @@ do
     (echo "Created consensus folder successfully" && exit 0)
   else
     (echo "Couldn't find consensus folder" && \
-      docker logs sia-container && \
+      docker logs sia-test-container && \
       exit 1)
   fi
 
-  curl -A "Sia-Agent" "http://localhost:9980/consensus"
+  curl -A "Sia-Agent" "http://localhost:9988/consensus"
 
-  docker rm -f sia-container
-  popd
+  docker rm -f sia-test-container
+  rm -rf $DUMMY_DATA_DIR
 done
+
+cleanup_test_containers
