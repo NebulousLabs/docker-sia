@@ -47,7 +47,6 @@ do
   curl -A "Sia-Agent" "http://localhost:9988/consensus"
 
   docker rm -f sia-test-container
-  rm -rf $DUMMY_DATA_DIR
 done
 
 cleanup_test_containers
