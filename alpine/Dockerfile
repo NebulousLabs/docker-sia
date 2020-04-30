@@ -15,6 +15,7 @@ RUN wget "$SIA_RELEASE" && \
 
 FROM alpine:3
 LABEL maintainer="NebulousLabs <devs@nebulous.tech>"
+LABEL autoheal=true
 ARG SIA_DIR="/sia"
 ARG SIA_DATA_DIR="/sia-data"
 
