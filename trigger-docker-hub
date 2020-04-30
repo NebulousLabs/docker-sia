@@ -9,4 +9,4 @@ set -x
 # Trigger Docker Hub to rebuild the dev image.
 curl -H "Content-Type: application/json" \
   --data '{"docker_tag": "dev"}' \
-  -X POST https://registry.hub.docker.com/u/nebulouslabs/sia/trigger/4c446c18-9be1-4304-96ce-889126cccd84/
+  -X POST https://hub.docker.com/api/build/v1/source/57afb708-6926-411b-98fc-44c79f59097c/trigger/513a6d92-9f8b-4f04-b20a-ebd51b193b5d/call/
