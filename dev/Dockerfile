@@ -8,18 +8,27 @@ RUN go get -d -u gitlab.com/NebulousLabs/Sia/... && \
     cd $GOPATH/src/gitlab.com/NebulousLabs/Sia && \
     make release
 
-FROM alpine
+FROM alpine:3
 LABEL maintainer="NebulousLabs <devs@nebulous.tech>"
+LABEL autoheal=true
 
-ENV SIA_DIR /sia
-ENV SIA_DATA_DIR /sia-data
-ENV SIA_MODULES gctwhr
+RUN mkdir /lib64 && \
+    ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 && \
+    apk add --no-cache socat
 
-RUN apk --no-cache add socat
+ARG SIA_DIR="/sia"
+ARG SIA_DATA_DIR="/sia-data"
 
 WORKDIR "$SIA_DIR"
+
+ENV SIA_DATA_DIR "$SIA_DATA_DIR"
+ENV SIA_MODULES gctwhr
+
 COPY --from=builder /go/bin/siad .
 COPY --from=builder /go/bin/siac .
+COPY healthcheck.sh .
 COPY run.sh .
+
+HEALTHCHECK --interval=10s CMD ["./healthcheck.sh"]
 
 ENTRYPOINT ["./run.sh"]

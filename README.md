@@ -1,6 +1,8 @@
 # docker-sia
 
-[![Build Status](https://travis-ci.org/nebulouslabs/docker-sia.svg?branch=master)](https://travis-ci.org/nebulouslabs/docker-sia) [![Docker Pulls](https://img.shields.io/docker/pulls/nebulouslabs/sia.svg?maxAge=604800)](https://hub.docker.com/r/nebulouslabs/sia/) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](LICENSE)
+[![Build Status](https://travis-ci.org/nebulouslabs/docker-sia.svg?branch=master)](https://travis-ci.org/nebulouslabs/docker-sia) 
+[![Docker Pulls](https://img.shields.io/docker/pulls/nebulouslabs/sia.svg?maxAge=604800)](https://hub.docker.com/r/nebulouslabs/sia/) 
+[![License](http://img.shields.io/:license-mit-blue.svg)](LICENSE)
 
 ## Supported Tags
 
@@ -21,7 +23,9 @@ docker run \
    nebulouslabs/sia
 ```
 
-**Important**: Never publish port 9980 to all interfaces. This is a security-sensitive API, so only expose it beyond 127.0.0.1 if you know what you're doing.
+**Important**: Never publish port 9980 to all interfaces. This is a 
+security-sensitive API, so only expose it beyond 127.0.0.1 if you know what 
+you're doing.
 
 Once the container is running, you can execute `siac` from within the container:
 
@@ -60,9 +64,9 @@ docker run -d \
 If you are unsure which image to use, use the default `latest` image.  
 If using an Alpine-based image makes more sense in your environment - use the 
 `alpine` image.  
-If you want to play around with the latest development build and see what we are 
-working on, use the `dev` image. Keep in mind that the `dev` image might not be 
-suitable for regular production use! 
+In case you want to play around with the latest development build and see what 
+we are working on, use the `dev` image. Keep in mind that the `dev` image might 
+not be suitable for regular production use! 
 
 ## Build it yourself
 

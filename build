@@ -39,7 +39,7 @@ do
   if [ -e "${DUMMY_DATA_DIR}/consensus" ]; then
     (echo "Created consensus folder successfully" && exit 0)
   else
-    (echo "Couldn't find consensus folder" && \
+    (echo "Couldn't find consensus folder for image at $DIR" && \
       docker logs sia-test-container && \
       exit 1)
   fi
@@ -47,7 +47,6 @@ do
   curl -A "Sia-Agent" "http://localhost:9988/consensus"
 
   docker rm -f sia-test-container
-  rm -rf $DUMMY_DATA_DIR
 done
 
 cleanup_test_containers
