@@ -24,10 +24,12 @@ WORKDIR "$SIA_DIR"
 ENV SIA_DATA_DIR "$SIA_DATA_DIR"
 ENV SIA_MODULES gctwhr
 
-COPY --from=builder /go/bin/siad .
 COPY --from=builder /go/bin/siac .
-COPY healthcheck.sh .
-COPY run.sh .
+COPY --from=builder /go/bin/siad .
+COPY scripts/healthcheck.sh .
+COPY scripts/run.sh .
+
+EXPOSE 9980 9981 9982
 
 HEALTHCHECK --interval=10s CMD ["./healthcheck.sh"]
 
