@@ -4,8 +4,13 @@ LABEL maintainer="NebulousLabs <devs@nebulous.tech>"
 ENV GOOS linux
 ENV GOARCH amd64
 
-RUN go get -d -u gitlab.com/NebulousLabs/Sia/... && \
+# Fetches the sha of the latest commit on the master branch that passed CI.
+COPY dev/master_sha.go .
+
+RUN export SHA=`go run master_sha.go` && \
+    go get -d -u gitlab.com/NebulousLabs/Sia/... && \
     cd $GOPATH/src/gitlab.com/NebulousLabs/Sia && \
+    git reset --hard $SHA && \
     make release
 
 FROM alpine:3
