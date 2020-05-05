@@ -12,12 +12,17 @@ FROM alpine:3
 LABEL maintainer="NebulousLabs <devs@nebulous.tech>"
 LABEL autoheal=true
 
+ARG SIA_DIR="/sia"
+ARG SIA_DATA_DIR="/sia-data"
+
 RUN mkdir /lib64 && \
     ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 && \
     apk add --no-cache socat
 
-ARG SIA_DIR="/sia"
-ARG SIA_DATA_DIR="/sia-data"
+# Workaround for backwards compatibility with old images, which hardcoded the
+# Sia data directory as /mnt/sia. Creates a symbolic link so that any previous
+# path references stored in the Sia host config still work.
+RUN ln -s "$SIA_DATA_DIR" /mnt/sia
 
 WORKDIR "$SIA_DIR"
 
