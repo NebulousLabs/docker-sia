@@ -17,22 +17,29 @@ FROM alpine:3
 LABEL maintainer="NebulousLabs <devs@nebulous.tech>"
 LABEL autoheal=true
 
+ARG SIA_DIR="/sia"
+ARG SIA_DATA_DIR="/sia-data"
+
 RUN mkdir /lib64 && \
     ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 && \
     apk add --no-cache socat
 
-ARG SIA_DIR="/sia"
-ARG SIA_DATA_DIR="/sia-data"
+# Workaround for backwards compatibility with old images, which hardcoded the
+# Sia data directory as /mnt/sia. Creates a symbolic link so that any previous
+# path references stored in the Sia host config still work.
+RUN ln -s "$SIA_DATA_DIR" /mnt/sia
 
 WORKDIR "$SIA_DIR"
 
 ENV SIA_DATA_DIR "$SIA_DATA_DIR"
 ENV SIA_MODULES gctwhr
 
-COPY --from=builder /go/bin/siad .
 COPY --from=builder /go/bin/siac .
-COPY healthcheck.sh .
-COPY run.sh .
+COPY --from=builder /go/bin/siad .
+COPY scripts/healthcheck.sh .
+COPY scripts/run.sh .
+
+EXPOSE 9980 9981 9982
 
 HEALTHCHECK --interval=10s CMD ["./healthcheck.sh"]
 

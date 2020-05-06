@@ -2,8 +2,3 @@
 sudo: required
 services: docker
 script: ./build
-#deploy:
-#  provider: script
-#  script: ./trigger-docker-hub
-#  on:
-#    branch: master
