@@ -17,10 +17,15 @@ FROM debian:stretch-slim
 LABEL maintainer="NebulousLabs <devs@nebulous.tech>"
 LABEL autoheal=true
 
-RUN apt-get update && apt-get install -y --no-install-recommends socat
-
 ARG SIA_DIR="/sia"
 ARG SIA_DATA_DIR="/sia-data"
+
+RUN apt-get update && apt-get install -y --no-install-recommends socat
+
+# Workaround for backwards compatibility with old images, which hardcoded the
+# Sia data directory as /mnt/sia. Creates a symbolic link so that any previous
+# path references stored in the Sia host config still work.
+RUN ln -s "$SIA_DATA_DIR" /mnt/sia
 
 WORKDIR "$SIA_DIR"
 
