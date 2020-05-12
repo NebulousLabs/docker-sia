@@ -16,7 +16,7 @@ cleanup_test_containers() {
 
 cleanup_test_containers
 
-for DIR in ./ ./alpine ./dev ./pi
+for DIR in ./ ./alpine ./dev
 do
   docker build \
     --tag sia-image \
