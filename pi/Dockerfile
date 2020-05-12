@@ -40,7 +40,9 @@ ARG SIA_DATA_DIR="/sia-data"
 #    ln -s /usr/bin/qemu-arm-static /usr/bin/qemu-arm && \
 #    ln -s /usr/bin/qemu-arm /usr/local/bin
 
-RUN apt-get update && apt-get install -y --no-install-recommends socat && apt-get clean
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends socat && \
+    apt-get clean
 
 # Workaround for backwards compatibility with old images, which hardcoded the
 # Sia data directory as /mnt/sia. Creates a symbolic link so that any previous
