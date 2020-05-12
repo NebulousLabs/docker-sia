@@ -26,6 +26,8 @@ ARG SIA_DATA_DIR="/sia-data"
 # We need qemu in order to run ARM commands on an AMD64 CI machine.
 COPY --from=zip_downloader qemu-aarch64-static /usr/bin
 
+
+
 RUN apt-get update && apt-get install -y --no-install-recommends socat
 
 # Workaround for backwards compatibility with old images, which hardcoded the
