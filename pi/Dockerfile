@@ -20,6 +20,8 @@ LABEL autoheal=true
 ARG SIA_DIR="/sia"
 ARG SIA_DATA_DIR="/sia-data"
 
+RUN ls
+
 RUN apt-get update && apt-get install -y --no-install-recommends socat
 
 # Workaround for backwards compatibility with old images, which hardcoded the
