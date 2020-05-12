@@ -7,8 +7,9 @@ ARG SIA_ZIP="${SIA_PACKAGE}.zip"
 ARG SIA_RELEASE="https://sia.tech/releases/${SIA_ZIP}"
 #ARG QEMU_BIN="https://github.com/multiarch/qemu-user-static/releases/download/v4.2.0-7/qemu-arm-static"
 
+ #qemu binfmt-support qemu-user-static
 RUN apt-get update && \
-    apt-get install -y wget unzip && \ #qemu binfmt-support qemu-user-static
+    apt-get install -y wget unzip && \
     wget "$SIA_RELEASE" && \
     mkdir /sia && \
     unzip -j "$SIA_ZIP" "${SIA_PACKAGE}/siac" -d /sia && \
