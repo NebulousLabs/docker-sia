@@ -7,7 +7,6 @@ ARG SIA_ZIP="${SIA_PACKAGE}.zip"
 ARG SIA_RELEASE="https://sia.tech/releases/${SIA_ZIP}"
 ARG QEMU_BIN="https://github.com/multiarch/qemu-user-static/releases/download/v4.2.0-7/qemu-aarch64-static"
 
-
 RUN apt-get update && \
     apt-get install -y wget unzip && \
     wget "$SIA_RELEASE" && \
@@ -25,11 +24,7 @@ ARG SIA_DIR="/sia"
 ARG SIA_DATA_DIR="/sia-data"
 
 COPY --from=zip_downloader qemu-aarch64-static /usr/bin
-COPY --from=zip_downloader qemu-aarch64-static /usr/local/bin
-# COPY scripts/setup_binfmt_misk.sh .
-# RUN ./setup_binfmt_misk.sh
-
-RUN ls
+#COPY --from=zip_downloader qemu-aarch64-static /usr/local/bin
 
 RUN apt-get update && apt-get install -y --no-install-recommends socat
 
