@@ -25,8 +25,8 @@ ARG SIA_DATA_DIR="/sia-data"
 
 # We need qemu in order to run ARM commands on an AMD64 CI machine.
 COPY --from=zip_downloader qemu-aarch64-static /usr/bin
-
-
+# We add this again for Docker Hub's sake. Try with `arm` first.
+ADD qemu-arm-static /usr/bin
 
 RUN apt-get update && apt-get install -y --no-install-recommends socat
 
