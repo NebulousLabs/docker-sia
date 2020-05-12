@@ -7,15 +7,18 @@
 ## Supported Tags
 
 * **latest**: The latest official binary release.
+* **1.4.8**
 * **1.4.7**
 
 
 * **alpine-latest**: The latest official binary release based on Alpine Linux.
+* **alpine-1.4.8**
 * **alpine-1.4.7**
 
 
 * **pi-latest**: The latest official binary release for Raspberry Pi or any other 
 machine with an ARMv8 CPU.
+* **pi-1.4.8**
 * **pi-1.4.7**
 
 
