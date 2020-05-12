@@ -6,8 +6,26 @@
 
 ## Supported Tags
 
-* latest: The latest official binary release.
-* 1.4.7
+* **latest**: The latest official binary release.
+* **1.4.8**
+* **1.4.7**
+
+
+* **alpine-latest**: The latest official binary release based on Alpine Linux.
+* **alpine-1.4.8**
+* **alpine-1.4.7**
+
+
+<!--
+* **pi-latest**: The latest official binary release for Raspberry Pi or any other 
+machine with an ARMv8 CPU.
+* **pi-1.4.8**
+* **pi-1.4.7**
+-->
+
+* **dev**: A recent build of the `master` branch. Typically unsuitable for 
+production use, this image is aimed at people who want to tinker and stay up to 
+the date with the latest development. Usually rebuilt around 2am CET.
 
 ## Usage
 
