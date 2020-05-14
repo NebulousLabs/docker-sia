@@ -5,22 +5,28 @@ ARG SIA_VERSION="1.4.8"
 ARG SIA_PACKAGE="Sia-v${SIA_VERSION}-linux-arm64"
 ARG SIA_ZIP="${SIA_PACKAGE}.zip"
 ARG SIA_RELEASE="https://sia.tech/releases/${SIA_ZIP}"
+ARG QEMU_BIN="https://github.com/multiarch/qemu-user-static/releases/download/v4.2.0-7/qemu-aarch64-static"
 
 RUN apt-get update && \
     apt-get install -y wget unzip && \
     wget "$SIA_RELEASE" && \
     mkdir /sia && \
     unzip -j "$SIA_ZIP" "${SIA_PACKAGE}/siac" -d /sia && \
-    unzip -j "$SIA_ZIP" "${SIA_PACKAGE}/siad" -d /sia
+    unzip -j "$SIA_ZIP" "${SIA_PACKAGE}/siad" -d /sia && \
+    wget "$QEMU_BIN" && \
+    chmod +x qemu-aarch64-static
 
-FROM arm64v8/alpine
+FROM arm64v8/debian:stretch-slim
 LABEL maintainer="NebulousLabs <devs@nebulous.tech>"
 LABEL autoheal=true
 
 ARG SIA_DIR="/sia"
 ARG SIA_DATA_DIR="/sia-data"
 
-RUN apk add --no-cache socat
+# We need qemu in order to run ARM commands on an AMD64 CI machine.
+COPY --from=zip_downloader qemu-aarch64-static /usr/bin
+
+RUN apt-get update && apt-get install -y --no-install-recommends socat
 
 # Workaround for backwards compatibility with old images, which hardcoded the
 # Sia data directory as /mnt/sia. Creates a symbolic link so that any previous
