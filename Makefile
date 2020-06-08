@@ -1,5 +1,5 @@
 name=sia-container
-version=1.4.10
+version=1.4.11
 
 default: release
 
@@ -30,3 +30,5 @@ pi:
 
 stop:
 	docker stop $(docker ps -a -q --filter "name=$(name)") && docker rm $(docker ps -a -q --filter "name=$(name)")
+
+# TODO ssh, ps, run with custom sia-data and log dir
