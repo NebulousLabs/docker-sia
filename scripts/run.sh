@@ -15,4 +15,6 @@ END
 # PID 1. We need that in order to have `siad` receive OS signals (e.g. SIGTERM)
 # on container shutdown, so it can exit gracefully and no data corruption can
 # occur.
-exec $SIAD_CMD "$@"
+exec $SIAD_CMD "$@" \
+  1>"$SIA_DATA_DIR/siad_stdout.log" \
+  2>"$SIA_DATA_DIR/siad_errout.log"
