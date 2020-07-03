@@ -19,7 +19,6 @@ echo "" >"$SIA_DATA_DIR/siad_stdout.log"
 echo "" >"$SIA_DATA_DIR/siad_errout.log"
 
 # Output the logs to stdout and stderr.
-# See https://stackoverflow.com/a/23550347/363293 for details.
 tail -qF "$SIA_DATA_DIR/siad_stdout.log" &
 >&2 tail -qF "$SIA_DATA_DIR/siad_errout.log" &
 
