@@ -53,13 +53,14 @@ docker run \
 security-sensitive API, so only expose it beyond 127.0.0.1 if you know what 
 you're doing.
 
-By default the container uses the following defaults:  
+By default, the container uses the following defaults:  
 - `SIA_DIR` is `/sia`
 - `SIA_DATA_DIR` is `/sia-data`
 - `SIAD_DATA_DIR` is `/sia-data`
 
-You can change those defaults by supplying new environment variables for the 
-container using the `-e` option:  
+You can change the values of `SIA_DATA_DIR` and `SIAD_DATA_DIR` by supplying new
+environment variables for the container using the `-e` option:  
+`-e SIA_DATA_DIR=/new-sia-data-dir`  
 `-e SIAD_DATA_DIR=/new-siad-data-dir`
 
 Once the container is running, you can execute `siac` from within the container:
