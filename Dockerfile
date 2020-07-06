@@ -19,6 +19,7 @@ LABEL autoheal=true
 
 ARG SIA_DIR="/sia"
 ARG SIA_DATA_DIR="/sia-data"
+ARG SIAD_DATA_DIR="/sia-data"
 
 RUN apt-get update && apt-get install -y --no-install-recommends socat
 
@@ -30,6 +31,7 @@ RUN ln -s "$SIA_DATA_DIR" /mnt/sia
 WORKDIR "$SIA_DIR"
 
 ENV SIA_DATA_DIR "$SIA_DATA_DIR"
+ENV SIAD_DATA_DIR "$SIAD_DATA_DIR"
 ENV SIA_MODULES gctwhr
 
 COPY --from=zip_downloader /sia/siac .

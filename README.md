@@ -6,28 +6,34 @@
 
 ## Supported Tags
 
+### Latest
 * **latest**: The latest official binary release.
-* **1.4.11**
-* **1.4.10**
-* **1.4.8**
-* **1.4.7**
-
 * **alpine-latest**: The latest official binary release based on Alpine Linux.
-* **alpine-1.4.11**
-* **alpine-1.4.10**
-* **alpine-1.4.8**
-* **alpine-1.4.7**
-
 * **pi-latest**: The latest official binary release for Raspberry Pi or any other 
 machine with an ARMv8 CPU.
-* **pi-1.4.11**
-* **pi-1.4.10**
-* **pi-1.4.8**
-* **pi-1.4.7**
-
 * **dev**: A recent build of the `master` branch. Typically unsuitable for 
 production use, this image is aimed at people who want to tinker and stay up to 
-the date with the latest development. Usually rebuilt around 2am CET.
+the date with the latest development. Usually rebuilt nightly around 2am CET.
+
+### v1.4.11
+* **1.4.11**
+* **alpine-1.4.11**
+* **pi-1.4.11**
+
+### v1.4.10
+* **1.4.10**
+* **alpine-1.4.10**
+* **pi-1.4.10**
+
+### v1.4.8
+* **1.4.8**
+* **alpine-1.4.8**
+* **pi-1.4.8**
+
+### v1.4.7
+* **1.4.7**
+* **alpine-1.4.7**
+* **pi-1.4.7**
 
 ## Usage
 
@@ -46,6 +52,16 @@ docker run \
 **Important**: Never publish port 9980 to all interfaces. This is a 
 security-sensitive API, so only expose it beyond 127.0.0.1 if you know what 
 you're doing.
+
+By default, the container uses the following defaults:  
+- `SIA_DIR` is `/sia`
+- `SIA_DATA_DIR` is `/sia-data`
+- `SIAD_DATA_DIR` is `/sia-data`
+
+You can change the values of `SIA_DATA_DIR` and `SIAD_DATA_DIR` by supplying new
+environment variables for the container using the `-e` option:  
+`-e SIA_DATA_DIR=/new-sia-data-dir`  
+`-e SIAD_DATA_DIR=/new-siad-data-dir`
 
 Once the container is running, you can execute `siac` from within the container:
 
