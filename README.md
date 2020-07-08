@@ -79,6 +79,15 @@ $ curl -A "Sia-Agent" "http://localhost:9980/consensus"
 {"synced":false,"height":4690,"currentblock":"0000000000007d656e3bb0099737892b9073259cb05883b04c6f518fbf0faffb","target":[0,0,0,0,0,2,200,179,126,85,220,153,25,190,195,228,72,53,129,181,62,124,175,60,255,90,105,68,179,16,6,71],"difficulty":"101104922300609"}
 ```
 
+## Logs
+
+If you are interested in `siad`'s logs you can start the container with the 
+following option `--log-driver local` and docker will keep the logs on disk.
+More info [here](https://docs.docker.com/config/containers/logging/local).  
+
+If you want to follow the logs while still being detached from the container,
+you can use `docker logs -f <container>`
+
 ## Health monitoring
 
 The `sia` container is equipped with a [HEALTHCHECK](https://docs.docker.com/engine/reference/builder/#healthcheck) 
