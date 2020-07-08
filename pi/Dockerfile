@@ -22,6 +22,7 @@ LABEL autoheal=true
 
 ARG SIA_DIR="/sia"
 ARG SIA_DATA_DIR="/sia-data"
+ARG SIAD_DATA_DIR="/sia-data"
 
 # We need qemu in order to run ARM commands on an AMD64 CI machine.
 COPY --from=zip_downloader qemu-aarch64-static /usr/bin
@@ -36,6 +37,7 @@ RUN ln -s "$SIA_DATA_DIR" /mnt/sia
 WORKDIR "$SIA_DIR"
 
 ENV SIA_DATA_DIR "$SIA_DATA_DIR"
+ENV SIAD_DATA_DIR "$SIAD_DATA_DIR"
 ENV SIA_MODULES gctwhr
 
 COPY --from=zip_downloader /sia/siac .

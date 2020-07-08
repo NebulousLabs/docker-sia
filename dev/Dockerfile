@@ -19,6 +19,7 @@ LABEL autoheal=true
 
 ARG SIA_DIR="/sia"
 ARG SIA_DATA_DIR="/sia-data"
+ARG SIAD_DATA_DIR="/sia-data"
 
 RUN mkdir /lib64 && \
     ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 && \
@@ -32,6 +33,7 @@ RUN ln -s "$SIA_DATA_DIR" /mnt/sia
 WORKDIR "$SIA_DIR"
 
 ENV SIA_DATA_DIR "$SIA_DATA_DIR"
+ENV SIAD_DATA_DIR "$SIAD_DATA_DIR"
 ENV SIA_MODULES gctwhr
 
 COPY --from=builder /go/bin/siac .
