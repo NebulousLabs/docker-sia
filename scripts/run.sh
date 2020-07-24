@@ -4,7 +4,7 @@ socat tcp-listen:9980,reuseaddr,fork tcp:localhost:8000 &
 
 # Use the `cat` utility in order assign a multi-line string to a variable.
 SIAD_CMD=$(cat <<-END
-./siad \
+/usr/bin/siad \
   --modules $SIA_MODULES \
   --sia-directory $SIA_DATA_DIR \
   --api-addr localhost:8000
