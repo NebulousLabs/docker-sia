@@ -40,10 +40,8 @@ ENV SIA_DATA_DIR "$SIA_DATA_DIR"
 ENV SIAD_DATA_DIR "$SIAD_DATA_DIR"
 ENV SIA_MODULES gctwhr
 
-COPY --from=zip_downloader /sia/siac .
-COPY --from=zip_downloader /sia/siad .
-COPY scripts/healthcheck.sh .
-COPY scripts/run.sh .
+COPY --from=zip_downloader /sia/siac /sia/siad /usr/bin/
+COPY scripts/*.sh ./
 
 EXPOSE 9980 9981 9982
 
