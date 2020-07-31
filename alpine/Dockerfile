@@ -39,7 +39,7 @@ ENV SIA_MODULES gctwhr
 COPY --from=zip_downloader /sia/siac /sia/siad /usr/bin/
 COPY scripts/*.sh ./
 
-EXPOSE 9980 9981 9982
+EXPOSE 9980 9981 9982 9983 9984
 
 HEALTHCHECK --interval=10s CMD ["./healthcheck.sh"]
 
