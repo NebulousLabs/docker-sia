@@ -15,6 +15,11 @@ machine with an ARMv8 CPU.
 production use, this image is aimed at people who want to tinker and stay up to 
 the date with the latest development. Usually rebuilt nightly around 2am CET.
 
+### v1.5.0
+* **1.5.0**
+* **alpine-1.5.0**
+* **pi-1.5.0**
+
 ### v1.4.11
 * **1.4.11**
 * **alpine-1.4.11**
