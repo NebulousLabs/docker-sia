@@ -33,8 +33,4 @@ pi:
 stop:
 	docker stop $(docker ps -a -q --filter "name=$(name)") && docker rm $(docker ps -a -q --filter "name=$(name)")
 
-
-
-# TODO ssh, ps, run with custom sia-data and log dir
-
 .PHONY: all default dev release alpine pi stop
