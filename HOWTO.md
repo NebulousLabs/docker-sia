@@ -16,7 +16,7 @@ In order to verify that everything is OK go to the
 and make sure the builds for all the tags are either running or queued up. If 
 they are not, you have either not pushed the tags, or you've messed up the tag 
 format (you can see the exact regex for the tag format on the build page on 
-Docker Hub). Don't worry about deleting tags are adding them again - this will
+Docker Hub). Don't worry about deleting tags and adding them again - this will
 trigger the build process and the newly created images will replace the existing
 ones, allowing you to correct mistakes like tagging the wrong commit, etc.
 
