@@ -15,13 +15,13 @@ type build struct {
 
 func main() {
 	// If we have a SHA override then use it.
-	if os.Getenv("SHA") != "" {
-		fmt.Println(os.Getenv("SHA"))
+	if sha := os.Getenv("SHA"); sha != "" {
+		fmt.Println(sha)
 		os.Exit(0)
 	}
 	// If we have a TAG override then use it.
-	if os.Getenv("TAG") != "" {
-		fmt.Println(os.Getenv("TAG"))
+	if tag := os.Getenv("TAG"); tag != "" {
+		fmt.Println(tag)
 		os.Exit(0)
 	}
 
