@@ -71,7 +71,7 @@ environment variables for the container using the `-e` option:
 Once the container is running, you can execute `siac` from within the container:
 
 ```bash
-$ docker exec -it sia-container ./siac consensus
+$ docker exec -it sia-container siac consensus
 Synced: No
 Height: 3800
 Progress (estimated): 2.4%
