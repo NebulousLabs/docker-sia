@@ -130,3 +130,8 @@ docker build -t sia:1.4.7-dev-custom -f dev/Dockerfile
 ## More examples
 
 For more usage examples, see the blog post, ["Fun with Sia and Docker."](https://blog.spaceduck.io/sia-docker/)
+
+## Publishing a new version
+
+If you are looking for a howto on publishing a new version of this image, you
+can find one [here](https://github.com/NebulousLabs/docker-sia/blob/master/HOWTO.md).
