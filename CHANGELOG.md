@@ -1,3 +1,5 @@
+# Changelog
+
 ## 0.5.0 - 25th August 2020
 
 * Stop using `socat` and directly expose `siad` api on port 9980 instead
