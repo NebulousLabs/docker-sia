@@ -18,7 +18,6 @@ RUN export SHA=`go run master_sha.go` && \
 
 FROM alpine:3
 LABEL maintainer="NebulousLabs <devs@nebulous.tech>"
-LABEL autoheal=true
 
 ARG SIA_DIR="/sia"
 ARG SIA_DATA_DIR="/sia-data"
@@ -42,7 +41,5 @@ COPY --from=builder /go/bin/siac /go/bin/siad /usr/bin/
 COPY scripts/*.sh ./
 
 EXPOSE 9980 9981 9982 9983 9984
-
-HEALTHCHECK --interval=10s CMD ["./healthcheck.sh"]
 
 ENTRYPOINT ["./run.sh"]

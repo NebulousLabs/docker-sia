@@ -18,7 +18,6 @@ RUN apt-get update && \
 
 FROM arm64v8/debian:stretch-slim
 LABEL maintainer="NebulousLabs <devs@nebulous.tech>"
-LABEL autoheal=true
 
 ARG SIA_DIR="/sia"
 ARG SIA_DATA_DIR="/sia-data"
@@ -42,7 +41,5 @@ COPY --from=zip_downloader /sia/siac /sia/siad /usr/bin/
 COPY scripts/*.sh ./
 
 EXPOSE 9980 9981 9982 9983 9984
-
-HEALTHCHECK --interval=10s CMD ["./healthcheck.sh"]
 
 ENTRYPOINT ["./run.sh"]

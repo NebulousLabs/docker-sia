@@ -1,6 +1,7 @@
 ## 0.5.0 - 25th August 2020
 
 * Stop using `socat` and directly expose `siad` instead
+* Remove the health checks as they are no longer needed
 
 ## 0.4.0 - 27th July 2020
 

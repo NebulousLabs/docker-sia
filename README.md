@@ -93,22 +93,6 @@ More info [here](https://docs.docker.com/config/containers/logging/local).
 If you want to follow the logs while still being detached from the container,
 you can use `docker logs -f <container>`
 
-## Health monitoring
-
-The `sia` container is equipped with a [HEALTHCHECK](https://docs.docker.com/engine/reference/builder/#healthcheck) 
-and is labelled as `autoheal=true`. This allows us to use Will Farrel's [autoheal](https://hub.docker.com/r/willfarrell/autoheal/) 
-container in order to restart the `sia` container if it becomes unhealthy.
-
-All you need to do is start the `autoheal` container alongside `sia`:
-```
-docker run -d \
-    --name autoheal \
-    --restart=always \
-    -e AUTOHEAL_CONTAINER_LABEL=all \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    willfarrell/autoheal
-```
-
 ## Which image to use?
 
 If you are unsure which image to use, use the default `latest` image.  
