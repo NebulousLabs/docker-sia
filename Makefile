@@ -1,5 +1,5 @@
 name=sia-container
-version=1.4.11
+version=1.5.0
 
 default: release
 
@@ -7,6 +7,8 @@ all: release dev alpine pi
 
 dev:
 	docker build -f dev/Dockerfile \
+		--build-arg "SHA=$(sha)" \
+		--build-arg "TAG=$(tag)" \
 		-t $(name) -t nebulouslabs/sia:dev \
 		.
 
@@ -30,7 +32,5 @@ pi:
 
 stop:
 	docker stop $(docker ps -a -q --filter "name=$(name)") && docker rm $(docker ps -a -q --filter "name=$(name)")
-
-# TODO ssh, ps, run with custom sia-data and log dir
 
 .PHONY: all default dev release alpine pi stop

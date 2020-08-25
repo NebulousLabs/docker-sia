@@ -15,6 +15,11 @@ machine with an ARMv8 CPU.
 production use, this image is aimed at people who want to tinker and stay up to 
 the date with the latest development. Usually rebuilt nightly around 2am CET.
 
+### v1.5.0
+* **1.5.0**
+* **alpine-1.5.0**
+* **pi-1.5.0**
+
 ### v1.4.11
 * **1.4.11**
 * **alpine-1.4.11**
@@ -66,7 +71,7 @@ environment variables for the container using the `-e` option:
 Once the container is running, you can execute `siac` from within the container:
 
 ```bash
-$ docker exec -it sia-container ./siac consensus
+$ docker exec -it sia-container siac consensus
 Synced: No
 Height: 3800
 Progress (estimated): 2.4%
@@ -125,3 +130,8 @@ docker build -t sia:1.4.7-dev-custom -f dev/Dockerfile
 ## More examples
 
 For more usage examples, see the blog post, ["Fun with Sia and Docker."](https://blog.spaceduck.io/sia-docker/)
+
+## Publishing a new version
+
+If you are looking for a howto on publishing a new version of this image, you
+can find one [here](https://github.com/NebulousLabs/docker-sia/blob/master/HOWTO.md).

@@ -4,6 +4,9 @@ LABEL maintainer="NebulousLabs <devs@nebulous.tech>"
 ENV GOOS linux
 ENV GOARCH amd64
 
+ARG SHA
+ARG TAG
+
 # Fetches the sha of the latest commit on the master branch that passed CI.
 COPY dev/master_sha.go .
 
