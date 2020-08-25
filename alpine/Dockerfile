@@ -22,8 +22,7 @@ ARG SIA_DATA_DIR="/sia-data"
 ARG SIAD_DATA_DIR="/sia-data"
 
 RUN mkdir /lib64 && \
-    ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 && \
-    apk add --no-cache socat
+    ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
 
 # Workaround for backwards compatibility with old images, which hardcoded the
 # Sia data directory as /mnt/sia. Creates a symbolic link so that any previous
