@@ -6,7 +6,7 @@ siad \
   --disable-api-security \
   --modules $SIA_MODULES \
   --sia-directory $SIA_DATA_DIR \
-  --api-addr 0.0.0.0:9980
+  --api-addr :9980
 END
 )
 
