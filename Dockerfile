@@ -20,6 +20,8 @@ ARG SIA_DIR="/sia"
 ARG SIA_DATA_DIR="/sia-data"
 ARG SIAD_DATA_DIR="/sia-data"
 
+RUN apt-get update && apt-get install -y mime-support
+
 # Workaround for backwards compatibility with old images, which hardcoded the
 # Sia data directory as /mnt/sia. Creates a symbolic link so that any previous
 # path references stored in the Sia host config still work.

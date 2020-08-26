@@ -23,8 +23,10 @@ ARG SIA_DIR="/sia"
 ARG SIA_DATA_DIR="/sia-data"
 ARG SIAD_DATA_DIR="/sia-data"
 
+# We need the mailcap package for the mime types support it provides.
 RUN mkdir /lib64 && \
-    ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
+    ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 && \
+    apk add mailcap
 
 # Workaround for backwards compatibility with old images, which hardcoded the
 # Sia data directory as /mnt/sia. Creates a symbolic link so that any previous
