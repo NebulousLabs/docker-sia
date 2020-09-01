@@ -11,9 +11,12 @@
 * **alpine-latest**: The latest official binary release based on Alpine Linux.
 * **pi-latest**: The latest official binary release for Raspberry Pi or any other 
 machine with an ARMv8 CPU.
-* **dev**: A recent build of the `master` branch. Typically unsuitable for 
-production use, this image is aimed at people who want to tinker and stay up to 
-the date with the latest development. Usually rebuilt nightly around 2am CET.
+* **dev**: The latest version of the `master` branch that passed CI. Typically 
+unsuitable for production use, this image is aimed at people who want to tinker 
+and stay up to the date with the latest development.
+* **debug**: This is a special image that has a full development environment in 
+it. This image is not meant to be run in production, it's meant to be a 
+debugging and experimentation image.
 
 ### v1.5.0
 * **1.5.0**

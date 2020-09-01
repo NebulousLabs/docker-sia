@@ -3,14 +3,7 @@ version=1.5.0
 
 default: release
 
-all: release dev alpine pi
-
-dev:
-	docker build -f dev/Dockerfile \
-		--build-arg "SHA=$(sha)" \
-		--build-arg "TAG=$(tag)" \
-		-t $(name) -t nebulouslabs/sia:dev \
-		.
+all: release alpine pi dev
 
 release:
 	docker build -f Dockerfile \
@@ -30,7 +23,20 @@ pi:
 		-t $(name) -t nebulouslabs/sia:pi-$(version) -t nebulouslabs/sia:pi-latest \
 		.
 
+dev:
+	docker build -f dev/Dockerfile \
+		--build-arg "SHA=$(sha)" \
+		--build-arg "TAG=$(tag)" \
+		-t $(name) -t nebulouslabs/sia:dev \
+		.
+
+debug:
+	docker build -f debug/Dockerfile -t $(name) -t nebulouslabs/sia:debug .
+
+ci:
+	docker build -f ci/Dockerfile -t $(name) -t nebulouslabs/sia:ci .
+
 stop:
 	docker stop $(docker ps -a -q --filter "name=$(name)") && docker rm $(docker ps -a -q --filter "name=$(name)")
 
-.PHONY: all default dev release alpine pi stop
+.PHONY: all default release alpine pi dev debug ci stop
