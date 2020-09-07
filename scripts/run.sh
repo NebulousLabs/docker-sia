@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# This adjusts the logrotate configuration to the current value of SIA_DATA_DIR.
+sed -i "s#/sia-data#$SIA_DATA_DIR#gi" /etc/logrotate.d/sia
+
 # Use the `cat` utility in order assign a multi-line string to a variable.
 SIAD_CMD=$(cat <<-END
 siad \
