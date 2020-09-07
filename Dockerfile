@@ -35,6 +35,7 @@ ENV SIA_MODULES gctwhr
 
 COPY --from=zip_downloader /sia/siac /sia/siad /usr/bin/
 COPY scripts/*.sh ./
+COPY scripts/logrotate-sia /etc/logrotate.d/sia
 
 EXPOSE 9980
 
