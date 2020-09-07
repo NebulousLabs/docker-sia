@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.0 - 1st September 2020
+
+* Start rebuilding the `dev` image on each successful push to Sia's `master` branch.
+* Add a new `debug` image which has a full development environment in it. This image is not meant to be run in production, it's meant to be a debugging and experimentation image, as well as a CI image.
+
 ## 0.5.0 - 25th August 2020
 
 * Stop using `socat` and directly expose `siad` api on port 9980 instead
