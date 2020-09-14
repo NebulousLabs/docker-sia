@@ -1,0 +1,7 @@
+"/sia-data/*.log" "/sia-data/consensus/*.log" "/sia-data/wallet/*.log" "/sia-data/renter/*.log" "/sia-data/gateway/*.log" "/sia-data/feemanager/*.log" "/sia-data/transactionpool/*.log" "/sia-data/siamux/*.log" "/sia-data/host/*.log" "/sia-data/host/contractmanager/*.log" {
+    size 100M
+    rotate 10
+    compress
+    dateext
+    copytruncate
+}

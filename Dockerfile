@@ -20,7 +20,7 @@ ARG SIA_DIR="/sia"
 ARG SIA_DATA_DIR="/sia-data"
 ARG SIAD_DATA_DIR="/sia-data"
 
-RUN apt-get update && apt-get install -y mime-support
+RUN apt-get update && apt-get install -y mime-support logrotate
 
 # Workaround for backwards compatibility with old images, which hardcoded the
 # Sia data directory as /mnt/sia. Creates a symbolic link so that any previous
@@ -35,6 +35,7 @@ ENV SIA_MODULES gctwhr
 
 COPY --from=zip_downloader /sia/siac /sia/siad /usr/bin/
 COPY scripts/*.sh ./
+COPY scripts/logrotate-sia /etc/logrotate.d/sia
 
 EXPOSE 9980
 
