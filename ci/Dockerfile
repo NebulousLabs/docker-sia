@@ -5,4 +5,5 @@ RUN apt-get update && \
     apt-get -y install python3-pip && \
     apt-get clean && \
     wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.30.0 && \
-    pip3 install codespell
+    pip3 install codespell && \
+    go get gitlab.com/NebulousLabs/analyze
