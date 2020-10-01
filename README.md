@@ -6,6 +6,12 @@
 
 ## Supported Tags
 
+### _Future Update Notice:_
+_When we reach version 1.6 we are going to switch our `dev` image from Alpine
+to Debian. Together with this we'll introduce a new `dev-alpine` image and 
+we'll remove `dev-debian`. In the end we'll have the same setup but the naming
+will be consistent with `sia:latest` (Debian) and `sia:alpine-latest` (Alpine).
+
 ### Latest
 * **latest**: The latest official binary release.
 * **alpine-latest**: The latest official binary release based on Alpine Linux.
@@ -14,6 +20,7 @@ machine with an ARMv8 CPU.
 * **dev**: The latest version of the `master` branch that passed CI. Typically 
 unsuitable for production use, this image is aimed at people who want to tinker 
 and stay up to the date with the latest development.
+* **dev-debian**: The same as **dev** but based on `debian:stretch-slim`
 * **debug**: This is a special image that has a full development environment in 
 it. This image is not meant to be run in production, it's meant to be a 
 debugging and experimentation image.
