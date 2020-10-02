@@ -16,17 +16,14 @@ RUN export SHA=`go run master_sha.go` && \
     git reset --hard $SHA && \
     make release
 
-FROM alpine:3
+FROM debian:stretch-slim
 LABEL maintainer="NebulousLabs <devs@nebulous.tech>"
 
 ARG SIA_DIR="/sia"
 ARG SIA_DATA_DIR="/sia-data"
 ARG SIAD_DATA_DIR="/sia-data"
 
-# We need the mailcap package for the mime types support it provides.
-RUN mkdir /lib64 && \
-    ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 && \
-    apk add mailcap logrotate
+RUN apt-get update && apt-get install -y mime-support logrotate
 
 # Workaround for backwards compatibility with old images, which hardcoded the
 # Sia data directory as /mnt/sia. Creates a symbolic link so that any previous
