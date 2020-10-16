@@ -9,8 +9,9 @@ WORKDIR /root
 RUN apt-get update && \
     apt-get -y dist-upgrade && \
     apt-get -y autoremove && \
-    apt-get -y install python3-pip sudo wget curl zip vim nano nload psmisc less mime-support logrotate && \
+    apt-get -y install python3-pip sudo wget curl zip vim nano nload psmisc less mime-support logrotate cron && \
     apt-get clean && \
+    mv /etc/cron.daily/logrotate /etc/cron.hourly && \
     wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.30.0 && \
     pip3 install codespell && \
     go get -d -u gitlab.com/NebulousLabs/Sia/... && \

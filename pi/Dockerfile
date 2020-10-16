@@ -26,7 +26,8 @@ ARG SIAD_DATA_DIR="/sia-data"
 # We need qemu in order to run ARM commands on an AMD64 CI machine.
 COPY --from=zip_downloader qemu-aarch64-static /usr/bin
 
-RUN apt-get update && apt-get install -y mime-support logrotate
+RUN apt-get update && apt-get install -y mime-support logrotate cron && \
+    mv /etc/cron.daily/logrotate /etc/cron.hourly
 
 # Workaround for backwards compatibility with old images, which hardcoded the
 # Sia data directory as /mnt/sia. Creates a symbolic link so that any previous
