@@ -25,6 +25,11 @@ and stay up to the date with the latest development.
 it. This image is not meant to be run in production, it's meant to be a 
 debugging and experimentation image.
 
+### v1.5.1
+* **1.5.1**
+* **alpine-1.5.1**
+* **pi-1.5.1**
+
 ### v1.5.0
 * **1.5.0**
 * **alpine-1.5.0**
