@@ -1,7 +1,7 @@
 FROM debian:stretch-slim AS zip_downloader
 LABEL maintainer="NebulousLabs <devs@nebulous.tech>"
 
-ARG SIA_VERSION="1.5.1"
+ARG SIA_VERSION="1.5.2"
 ARG SIA_PACKAGE="Sia-v${SIA_VERSION}-linux-arm64"
 ARG SIA_ZIP="${SIA_PACKAGE}.zip"
 ARG SIA_RELEASE="https://sia.tech/releases/${SIA_ZIP}"
