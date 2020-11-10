@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.6.5 - 9th November 2020
+
+* Add version 1.5.2.
+
+## 0.6.4 - 4th November 2020
+
+* Fix `cron` and `logrotate` configurations.
+* Add version 1.5.1.
+* Fix the `build` script.
+
+## 0.6.3 - 2nd October 2020
+
+* Add a `dev-debian` image. This image will become the main dev image in the
+future while the current `dev` image will be renamed to `dev-alpine`. This will
+probably happen on the next major version of Sia (1.6).
+
+## 0.6.2 - 18th September
+
+* Add `analyze` to the CI image
+
+## 0.6.1 - 14th September 2020
+
+* Add `logrotate` to all images.
+
 ## 0.6.0 - 1st September 2020
 
 * Start rebuilding the `dev` image on each successful push to Sia's `master` branch.
