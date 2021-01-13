@@ -49,6 +49,8 @@ docker run \
   --publish 127.0.0.1:9980:9980 \
   --publish 9981:9981 \
   --publish 9982:9982 \
+  --publish 9983:9983 \
+  --publish 9984:9984 \
   --name sia-container \
    nebulouslabs/sia
 ```
