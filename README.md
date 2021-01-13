@@ -26,6 +26,7 @@ it. This image is not meant to be run in production, it's meant to be a
 debugging and experimentation image.
 
 ### Versions
+* **1.5.4**: 1.5.4, alpine-1.5.4, pi-1.5.4, debug-1.5.4
 * **1.5.3**: 1.5.3, alpine-1.5.3, pi-1.5.3, debug-1.5.3
 * **1.5.1**: 1.5.1, alpine-1.5.1, pi-1.5.1, debug-1.5.1
 * **1.5.0.4**: 1.5.0.4, alpine-1.5.0.4, pi-1.5.0.4, debug-1.5.0.4

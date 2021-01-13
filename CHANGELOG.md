@@ -1,5 +1,7 @@
 # Changelog
 
+## 1.5.4 (Sia 1.5.4) - 12th January 2021
+
 ## 1.5.3 (Sia 1.5.3) - 10th November 2020
 
 ## 1.5.1 (Sia 1.5.1) - 4th November 2020
