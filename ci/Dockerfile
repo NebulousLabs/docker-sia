@@ -1,6 +1,8 @@
 FROM golang:1.15
 LABEL maintainer="NebulousLabs <devs@nebulous.tech>"
 
+ENV GO111MODULE on
+
 RUN apt-get update && \
     apt-get -y install python3-pip && \
     apt-get clean && \

@@ -3,6 +3,7 @@ LABEL maintainer="NebulousLabs <devs@nebulous.tech>"
 
 ENV GOOS linux
 ENV GOARCH amd64
+ENV GO111MODULE on
 
 WORKDIR /root
 
@@ -14,12 +15,11 @@ RUN apt-get update && \
     mv /etc/cron.daily/logrotate /etc/cron.hourly && \
     wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.30.0 && \
     pip3 install codespell && \
-    go get -d -u gitlab.com/NebulousLabs/Sia/... && \
     go get gitlab.com/NebulousLabs/analyze && \
-    ln -s $GOPATH/src/gitlab.com/NebulousLabs/Sia ./ && \
-    cd $GOPATH/src/gitlab.com/NebulousLabs/Sia && \
+    git clone https://gitlab.com/NebulousLabs/Sia.git && \
+    cd Sia && \
     make release && \
-    cd
+    cd -
 
 # Setup the actual Sia environment.
 ARG SIA_DIR="/sia"

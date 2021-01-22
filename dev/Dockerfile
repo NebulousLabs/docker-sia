@@ -3,16 +3,19 @@ LABEL maintainer="NebulousLabs <devs@nebulous.tech>"
 
 ENV GOOS linux
 ENV GOARCH amd64
+ENV GO111MODULE on
 
 ARG SHA
 ARG TAG
 
 # Fetches the sha of the latest commit on the master branch that passed CI.
+# This is overriden by the manually supplied TAG and SHA values. That's done
+# in the Go code.
 COPY scripts/master_sha.go .
 
-RUN export SHA=`go run master_sha.go` && \
-    go get -d -u gitlab.com/NebulousLabs/Sia/... && \
-    cd $GOPATH/src/gitlab.com/NebulousLabs/Sia && \
+RUN SHA=`go run master_sha.go` && \
+    git clone https://gitlab.com/NebulousLabs/Sia.git && \
+    cd Sia && \
     git reset --hard $SHA && \
     make release
 

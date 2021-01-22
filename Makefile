@@ -30,6 +30,13 @@ dev:
 		-t $(name) -t nebulouslabs/sia:dev \
 		.
 
+dev-debian:
+	docker build -f dev-debian/Dockerfile \
+		--build-arg "SHA=$(sha)" \
+		--build-arg "TAG=$(tag)" \
+		-t $(name) -t nebulouslabs/sia:dev-debian \
+		.
+
 debug:
 	docker build -f debug/Dockerfile -t $(name) -t nebulouslabs/sia:debug .
 
@@ -39,4 +46,4 @@ ci:
 stop:
 	docker stop $(docker ps -a -q --filter "name=$(name)") && docker rm $(docker ps -a -q --filter "name=$(name)")
 
-.PHONY: all default release alpine pi dev debug ci stop
+.PHONY: all default release alpine pi dev debug ci stop dev-debian
