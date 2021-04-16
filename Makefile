@@ -1,5 +1,5 @@
 name=sia-container
-version=1.5.5
+version=1.5.6
 
 default: release
 
