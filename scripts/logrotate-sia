@@ -4,4 +4,5 @@
     compress
     dateext
     copytruncate
+    missingok
 }
