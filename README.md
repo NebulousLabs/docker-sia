@@ -5,7 +5,7 @@
 [![License](http://img.shields.io/:license-mit-blue.svg)](LICENSE)
 
 ### Deprecation Notice
-This image has been replaced by `ghcr.io/siafoundation/siad` and is no longer maintained. https://ghcr.io/siafoundation/siad
+This image has been replaced by `ghcr.io/siafoundation/siad` and is no longer maintained. The Dockerfile is now part of the siad repo at https://github.com/siafoundation/siad.
 
 ## Supported tags
 
