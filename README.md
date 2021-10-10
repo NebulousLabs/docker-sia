@@ -4,121 +4,225 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/nebulouslabs/sia.svg?maxAge=604800)](https://hub.docker.com/r/nebulouslabs/sia/) 
 [![License](http://img.shields.io/:license-mit-blue.svg)](LICENSE)
 
-## Supported Tags
+### Deprecation Notice
+This image has been replaced by `ghcr.io/siafoundation/siad` and is no longer maintained. The Dockerfile is now part of the siad repo at https://github.com/siafoundation/siad.
 
-### _Future Update Notice:_
-_When we reach version 1.6 we are going to switch our `dev` image from Alpine
-to Debian. Together with this we'll introduce a new `dev-alpine` image and 
-we'll remove `dev-debian`. In the end we'll have the same setup but the naming
-will be consistent with `sia:latest` (Debian) and `sia:alpine-latest` (Alpine)._
+## Supported tags
 
-### Latest
-* **latest**: The latest official binary release.
-* **alpine-latest**: The latest official binary release based on Alpine Linux.
-* **pi-latest**: The latest official binary release for Raspberry Pi or any other 
-machine with an ARMv8 CPU.
-* **dev**: The latest version of the `master` branch that passed CI. Typically 
-unsuitable for production use, this image is aimed at people who want to tinker 
-and stay up to the date with the latest development.
-* **dev-debian**: The same as **dev** but based on `debian:stretch-slim`
-* **debug**: This is a special image that has a full development environment in 
-it. This image is not meant to be run in production, it's meant to be a 
-debugging and experimentation image.
++ latest - the latest stable Sia release
++ versions - builds of exact Sia releases such as: `1.5.7`
++ master - an unstable build of Sia's current master branch.
 
-### Versions
-* **1.5.6**: 1.5.6, alpine-1.5.6, pi-1.5.6, debug-1.5.6
-* **1.5.5**: 1.5.5, alpine-1.5.5, pi-1.5.5, debug-1.5.5
-* **1.5.4**: 1.5.4, alpine-1.5.4, pi-1.5.4, debug-1.5.4
-* **1.5.3**: 1.5.3, alpine-1.5.3, pi-1.5.3, debug-1.5.3
-* **1.5.1**: 1.5.1, alpine-1.5.1, pi-1.5.1, debug-1.5.1
-* **1.5.0.4**: 1.5.0.4, alpine-1.5.0.4, pi-1.5.0.4, debug-1.5.0.4
-* **1.5.0.3**: 1.5.0.4, alpine-1.5.0.4, pi-1.5.0.4, debug-1.5.0.4
-* **1.5.0.2**: 1.5.0.4, alpine-1.5.0.4, pi-1.5.0.4, debug-1.5.0.4
-* **1.5.0.1**: 1.5.0.4, alpine-1.5.0.4, pi-1.5.0.4, debug-1.5.0.4
-* **1.5.0**: 1.5.0, alpine-1.5.0, pi-1.5.0
-* **1.4.11**: 1.4.11, alpine-1.4.11, pi-1.4.11
-* **1.4.10**: 1.4.10, alpine-1.4.10, pi-1.4.10
-* **1.4.8**: 1.4.8, alpine-1.4.8, pi-1.4.8
-* **1.4.7**: 1.4.7, alpine-1.4.7, pi-1.4.7
+**Get latest official release:**
+```
+docker pull ghcr.io/siafoundation/siad:latest
+```
+
+**Get Sia v1.5.7**
+```
+docker pull ghcr.io/siafoundation/siad:1.5.7
+```
+
+**Get current development version (not recommended)**
+```
+docker pull ghcr.io/siafoundation/siad:master
+```
 
 ## Usage
 
-```bash
-mkdir sia-data
+It is important to never publish port `9980` to anything but 
+`127.0.0.1:9980`. Doing so could give anyone full access to the Sia API and your
+wallet.
+
+Containers should never share volumes. If multiple sia containers are 
+needed one unique volume should be created per container.
+
+### Basic Container
+```
+docker volume create sia-data
 docker run \
-  --detach \
-  --volume $(pwd)/sia-data:/sia-data \
-  --publish 127.0.0.1:9980:9980 \
-  --publish 9981:9981 \
-  --publish 9982:9982 \
-  --publish 9983:9983 \
-  --publish 9984:9984 \
-  --name sia-container \
-   nebulouslabs/sia
+	--detach \
+	--restart unless-stopped \
+	--mount type=volume,src=sia-data,target=/sia-data \
+	--publish 127.0.0.1:9980:9980 \
+	--publish 9981:9981 \
+	--publish 9982:9982 \
+	--publish 9983:9983 \
+	--name sia \
+	ghcr.io/siafoundation/siad
 ```
 
-**Important**: Never publish port 9980 to all interfaces. This is a 
-security-sensitive API, so only expose it beyond 127.0.0.1 if you know what 
-you're doing.
+### Command Line Flags
 
-By default, the container uses the following defaults:  
-- `SIA_DIR` is `/sia`
-- `SIA_DATA_DIR` is `/sia-data`
-- `SIAD_DATA_DIR` is `/sia-data`
+Additional siad command line flags can be passed in by appending them to docker
+run.
 
-You can change the values of `SIA_DATA_DIR` and `SIAD_DATA_DIR` by supplying new
-environment variables for the container using the `-e` option:  
-`-e SIA_DATA_DIR=/new-sia-data-dir`  
-`-e SIAD_DATA_DIR=/new-siad-data-dir`
+#### Change API port from 9980 to 8880
+```
+docker run \
+	--detach
+	--restart unless-stopped \
+	--publish 127.0.0.1:8880:8880 \
+	--publish 9981:9981 \
+	--publish 9982:9982 \
+	--publish 9983:9983 \
+	ghcr.io/siafoundation/siad --api-addr ":8880"
+ ```
 
-Once the container is running, you can execute `siac` from within the container:
 
-```bash
-$ docker exec -it sia-container siac consensus
-Synced: No
-Height: 3800
-Progress (estimated): 2.4%
+#### Change SiaMux port from 9983 to 8883
+```
+docker run \
+	--detach
+	--restart unless-stopped \
+	--publish 127.0.0.1:9980:9980 \
+	--publish 9981:9981 \
+	--publish 9982:9982 \
+	--publish 8883:8883 \
+	ghcr.io/siafoundation/siad --siamux-addr ":8883"
+ ```
+
+#### Only run the minimum required modules
+ ```
+docker run \
+	--detach
+	--restart unless-stopped \
+	--publish 127.0.0.1:9980:9980 \
+	--publish 9981:9981 \
+	--publish 9982:9982 \
+	ghcr.io/siafoundation/siad -M gct
+ ```
+
+### Docker Compose
+
+```yml
+services:
+  sia:
+    container_name: sia
+    image: ghcr.io/siafoundation/siad:latest
+    ports:
+      - 127.0.0.1:9980:9980
+      - 9981:9981
+      - 9982:9982
+      - 9983:9983
+      - 9984:9984
+    volumes:
+      - sia-data:/sia-data
+    restart: unless-stopped
+
+volumes:
+  sia-data:
 ```
 
-You can also call `siad` from outside the container:
+#### Change API port from 9980 to 8880
+```yml
+services:
+  sia:
+    container_name: sia
+    command: --api-addr :8880
+    image: ghcr.io/siafoundation/siad:latest
+    ports:
+      - 127.0.0.1:8880:8880
+      - 9981:9981
+      - 9982:9982
+      - 9983:9983
+      - 9984:9984
+    volumes:
+      - sia-data:/sia-data
+    restart: unless-stopped
 
-```bash
-$ curl -A "Sia-Agent" "http://localhost:9980/consensus"
-{"synced":false,"height":4690,"currentblock":"0000000000007d656e3bb0099737892b9073259cb05883b04c6f518fbf0faffb","target":[0,0,0,0,0,2,200,179,126,85,220,153,25,190,195,228,72,53,129,181,62,124,175,60,255,90,105,68,179,16,6,71],"difficulty":"101104922300609"}
+volumes:
+  sia-data:
 ```
 
-## Logs
 
-If you are interested in `siad`'s logs you can start the container with the 
-following option `--log-driver local` and docker will keep the logs on disk.
-More info [here](https://docs.docker.com/config/containers/logging/local).  
+#### Change SiaMux port from 9983 to 8883
+```yml
+services:
+  sia:
+    container_name: sia
+    command: --siamux-addr :8883
+    image: ghcr.io/siafoundation/siad:latest
+    ports:
+      - 127.0.0.1:9980:9980
+      - 9981:9981
+      - 9982:9982
+      - 8883:8883
+      - 9984:9984
+    volumes:
+      - sia-data:/sia-data
+    restart: unless-stopped
 
-If you want to follow the logs while still being detached from the container,
-you can use `docker logs -f <container>`
+volumes:
+  sia-data:
+```
 
-## Which image to use?
+#### Only run the minimum required modules
+```yml
+services:
+  sia:
+    container_name: sia
+    command: -M gct
+    image: ghcr.io/siafoundation/siad:latest
+    ports:
+      - 127.0.0.1:9980:9980
+      - 9981:9981
+      - 9982:9982
+      - 9983:9983
+      - 9984:9984
+    volumes:
+      - sia-data:/sia-data
+    restart: unless-stopped
 
-If you are unsure which image to use, use the default `latest` image.  
-If using an Alpine-based image makes more sense in your environment - use the 
-`alpine` image.  
-In case you want to play around with the latest development build and see what 
-we are working on, use the `dev` image. Keep in mind that the `dev` image might 
-not be suitable for regular production use! 
+volumes:
+  sia-data:
+```
+
+## Interacting with Sia
+You can interact with Sia by using the bundled `siac` through `docker exec` or downloading `siac` separately.
+
+#### Print help text
+```
+docker exec -it sia /siac --help
+```
+
+#### Get current sync status
+```
+docker exec -it sia /siac consensus
+```
+
+#### Get wallet balance
+```
+docker exec -it sia /siac wallet
+```
+
+### Sia API Password
+
+When you create or update the Sia container a random API password will be
+generated. You may need to copy the new API password when connecting outside of
+the container. To force the same API password to be used you can add
+`-e SIA_API_PASSWORD=yourpasswordhere` to the `docker run` command. This will
+ensure that the API password stays the same between updates and restarts.
+
+### Using Specific Modules
+
+You can pass in different combinations of Sia modules to run by modifying the 
+command used to create the container. For example: `-M gct` tells Sia to only
+run the gateway, consensus, and transactionpool modules. `-M gctwh` is the minimum
+required modules to run a Sia host. `-m gctwr` is the minimum required modules to
+run a Sia renter.
+
+### Hosts
+
+Hosting may require additional volumes passed into the container to map
+local drives into the container. These can be added by specifying
+docker's `-v` or `--mount` flag.
 
 ## Build it yourself
 
-Building the container is very simple. The only thing you need to keep in mind 
-is to run the build from the project's root folder, so your build context will 
-have access to the various scripts we're using:
-```
-docker build -t sia:1.4.7-dev-custom -f dev/Dockerfile
-```
+The Dockerfile is part of the `siad` repo (https://github.com/siafoundation/siad). To build the image:
 
-## More examples
-
-For more usage examples, see the blog post, ["Fun with Sia and Docker."](https://blog.spaceduck.io/sia-docker/)
-
-## Publishing a new version
-
-If you are looking for a howto on publishing a new version of this image, you
-can find one [here](https://github.com/NebulousLabs/docker-sia/blob/master/HOWTO.md).
+1. Clone the siad repo `git clone https://github.com/siafoundation/siad`
+2. Enter to the repo directory `cd siad`
+3. Checkout the version of Sia you want to build with `git checkout`
+4. Build the image `docker build -t siad .`
