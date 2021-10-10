@@ -31,7 +31,7 @@ docker pull ghcr.io/siafoundation/siad:master
 ## Usage
 
 It is important to never publish port `9980` to anything but 
-`127.0.0.1:9980`, doing so could give anyone full access to the Sia API and your
+`127.0.0.1:9980`. Doing so could give anyone full access to the Sia API and your
 wallet.
 
 Containers should never share volumes. If multiple sia containers are 
